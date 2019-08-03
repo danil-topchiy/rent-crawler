@@ -48,6 +48,13 @@ To run all tests, run ::
     flask test
 
 
+Running crawling
+-----------------
+
+To start crawling and saving rent objects to database (currently dom.ria.com kyiv objects only) , run ::
+
+    flask start_crawling
+
 
 Docker
 ------
