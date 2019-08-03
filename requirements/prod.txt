@@ -1,0 +1,21 @@
+# Flask
+Flask==1.0.2
+Werkzeug==0.14.1
+click>=5.0
+
+# Database
+flask-mongoengine==0.9.5
+
+# Flask-Restful
+flask-restful
+
+# Deployment
+gevent==1.4.0
+gunicorn>=19.1.1
+supervisor==4.0.2
+
+# Environment variable parsing
+environs==4.0.0
+
+# Scrapy
+scrapy

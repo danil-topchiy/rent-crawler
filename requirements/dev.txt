@@ -1,0 +1,10 @@
+-r prod.txt
+
+# flask ipython shell
+flask-shell-ipython
+
+# Testing
+pytest==3.7.4
+WebTest==2.0.30
+factory-boy==2.11.1
+pdbpp==0.10.0
