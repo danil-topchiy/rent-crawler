@@ -3,8 +3,8 @@ from flask_restful import Api, Resource, reqparse
 from bson import ObjectId
 from mongoengine.queryset.visitor import Q
 
-from .models import RentObject
-from .serializers import rent_objects_schema
+from .models import RentObject, CityDistrict
+from .serializers import rent_objects_schema, city_districts_schema
 
 blueprint = Blueprint('core', __name__, url_prefix='/api/')
 api = Api(blueprint)
@@ -14,11 +14,11 @@ DEFAULT_PAGE_SIZE = 20
 
 rent_search_parser = reqparse.RequestParser()
 rent_search_parser.add_argument('page', type=int, default=1)
-rent_search_parser.add_argument('order_by', choices=('price', '-price', 'date', '-date'))
+rent_search_parser.add_argument('orderBy', choices=('price', '-price', 'date', '-date'))
 rent_search_parser.add_argument('rooms', type=int)
-rent_search_parser.add_argument('low_price', type=int)
-rent_search_parser.add_argument('high_price', type=int)
-rent_search_parser.add_argument('city_district', type=ObjectId)
+rent_search_parser.add_argument('lowPrice', type=int)
+rent_search_parser.add_argument('highPrice', type=int)
+rent_search_parser.add_argument('cityDistrict', type=ObjectId)
 rent_search_parser.add_argument('search')
 
 
@@ -27,11 +27,11 @@ class RentObjectsList(Resource):
     def get(self):
         args = rent_search_parser.parse_args()
         page = args.get('page')
-        order_by = args.get('order_by')
-        city_district = args.get('city_district')
+        order_by = args.get('orderBy')
+        city_district = args.get('cityDistrict')
         rooms = args.get('rooms')
-        low_price = args.get('low_price')
-        high_price = args.get('high_price')
+        low_price = args.get('lowPrice')
+        high_price = args.get('highPrice')
         search = args.get('search')
 
         rent_objects_qs = RentObject.objects
@@ -69,4 +69,12 @@ class RentObjectsList(Resource):
         }
 
 
+class CityDistrictsList(Resource):
+
+    def get(self):
+        districts = CityDistrict.objects.all()
+        return city_districts_schema.dump(districts).data
+
+
 api.add_resource(RentObjectsList, 'rent-objects')
+api.add_resource(CityDistrictsList, 'city-districts')

@@ -5,7 +5,7 @@ from flask import Flask
 
 from rent_crawler import commands
 from rent_crawler.extensions import db
-from rent_crawler import core
+from rent_crawler import core, public
 
 
 def create_app(config_object="rent_crawler.settings"):
@@ -13,7 +13,7 @@ def create_app(config_object="rent_crawler.settings"):
     Create application factory
     :param config_object: The configuration object to use.
     """
-    app = Flask(__name__.split(".")[0])
+    app = Flask(__name__.split(".")[0], static_folder='../frontend/dist/static', template_folder='../frontend/dist')
     app.config.from_object(config_object)
     register_extensions(app)
     register_blueprints(app)
@@ -31,6 +31,7 @@ def register_extensions(app):
 def register_blueprints(app):
     """Register Flask blueprints."""
     app.register_blueprint(core.api.blueprint)
+    app.register_blueprint(public.views.blueprint)
     return None
 
 
