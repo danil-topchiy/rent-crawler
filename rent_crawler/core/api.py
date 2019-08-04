@@ -11,8 +11,12 @@ api = Api(blueprint)
 class RentObjectsList(Resource):
 
     def get(self):
-        rent_objects = RentObject.objects.all()
-        return rent_objects_schema.dump(rent_objects)
+        rent_objects_qs = RentObject.objects.filter()
+        rent_objects = rent_objects_qs.select_related()
+        return {
+            'data': rent_objects_schema.dump(rent_objects),
+            'count': rent_objects_qs.count()
+        }
 
 
 api.add_resource(RentObjectsList, 'rent-objects')

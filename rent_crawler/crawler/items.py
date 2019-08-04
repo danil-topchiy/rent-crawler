@@ -8,4 +8,4 @@ class RentObjectItem(scrapy.Item):
     text = scrapy.Field()
     price = scrapy.Field()
     rooms = scrapy.Field()
-    # district = scrapy.Field()
+    city_district_title = scrapy.Field()

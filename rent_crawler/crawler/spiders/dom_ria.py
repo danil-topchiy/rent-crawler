@@ -51,7 +51,7 @@ class DomRiaSpider(scrapy.Spider):
         item = RentObjectItem()
         item['url'] = response.url
         item['short_title'] = get_normalized_string(response.meta.get('short_title'))
-        # item['district'] = re.search(r'р‑н. ([а-яА-Я]+)', item['short_title']).group(1)
+        item['city_district_title'] = re.search(r'р‑н. ([а-яА-Я]+)', item['short_title']).group(1)
         item['title'] = get_normalized_string(response.xpath("//div[@class='finalPage']"))
         item['text'] = get_normalized_string(response.xpath("//div[@id='descriptionBlock']"))
         str_price = response.xpath("string(//aside//span[@class='price'])").get()
