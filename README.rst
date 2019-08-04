@@ -43,9 +43,9 @@ By default, you will have access to the flask ``app``.
 Running Tests
 --------------------
 
-To run all tests, run ::
+To run flask tests, run ::
 
-    flask test
+    pytest tests/
 
 
 Running crawling
