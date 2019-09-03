@@ -1,8 +1,27 @@
 version: '3'
 
 services:
-  mongo:
+  db:
     image: mongo
     restart: always
+
+  app:
+    build:
+      context: .
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    command: gunicorn --bind 0.0.0.0:5000 autoapp:app
     ports:
-      - 27018:27017
+      - "5000:5000"
+
+  frontend:
+    build:
+      context: frontend/
+    ports:
+      - "8080:8080"
+
+

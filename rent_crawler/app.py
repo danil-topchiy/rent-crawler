@@ -4,8 +4,8 @@ import sys
 from flask import Flask
 
 from rent_crawler import commands
-from rent_crawler.extensions import db
-from rent_crawler import core, public
+from rent_crawler.extensions import db, cors
+from rent_crawler import core
 
 
 def create_app(config_object="rent_crawler.settings"):
@@ -25,13 +25,13 @@ def create_app(config_object="rent_crawler.settings"):
 def register_extensions(app):
     """Register Flask extensions."""
     db.init_app(app)
+    cors.init_app(app)
     return None
 
 
 def register_blueprints(app):
     """Register Flask blueprints."""
     app.register_blueprint(core.api.blueprint)
-    app.register_blueprint(public.views.blueprint)
     return None
 
 

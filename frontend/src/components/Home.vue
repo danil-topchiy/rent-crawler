@@ -129,7 +129,7 @@ export default {
         }
       }
       this.$router.replace({query: params})
-      axios.get('api/rent-objects', {params: params})
+      axios.get(`${process.env.API_ROOT}api/rent-objects`, {params: params})
         .then((res) => {
           this.rentObjects = res.data.data
           this.count = res.data.count
@@ -151,7 +151,7 @@ export default {
     },
 
     getCityDistricts () {
-      axios.get('api/city-districts')
+      axios.get(`${process.env.API_ROOT}api/city-districts`)
         .then((res) => {
           this.cityDisctricts = res.data
         })

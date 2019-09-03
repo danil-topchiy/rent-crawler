@@ -1,0 +1,10 @@
+*.py[cod]
+
+# IDE
+.idea
+
+# virtualenv
+venv/
+
+# frontend
+frontend/

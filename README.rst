@@ -53,13 +53,13 @@ Running crawling
 
 To start crawling and saving rent objects to database (currently dom.ria.com kyiv objects only) , run ::
 
-    flask start_crawling
+    flask start-crawling
 
 
 Docker
 ------
 
-To get MongoDb up in docker run ::
+To run app using docker-compose, run:
 
-    docker-compose up -d mongo
+    docker-compose up -d
 
